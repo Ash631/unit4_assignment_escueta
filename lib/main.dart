@@ -26,9 +26,10 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Profile'), 
+        title: const Text('My Profile'),
       ),
-      body: SingleChildScrollView( 
+      
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -38,26 +39,25 @@ class MyHomePage extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage('assets/images/joshua.JPG'),
+                    backgroundImage: AssetImage('assets/images/joshua.JPG'), 
                   ),
                   SizedBox(width: 16),
                   Text(
-                    'Marc Joshua H. Escueta', 
+                    'Marc Joshua H. Escueta',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-
-               const SizedBox(height: 24,),
-
-              _buildInfoSection('Email', Icons.email, 'MarcJoshua.Escueta@wvsu.edu.ph'),
+              const SizedBox(height: 24),
+              _buildInfoSection('Email', Icons.email,
+                  'MarcJoshua.Escueta@wvsu.edu.ph'),
               _buildInfoSection('Phone', Icons.phone, '+639163371853'),
-              _buildInfoSection('Location', Icons.location_on, 'Santa Barbara, Iloilo'),
-              _buildInfoSection('Hobbies', Icons.sports_baseball, 'Studying, Coding, Dancing, Writing'),
+              _buildInfoSection(
+                  'Location', Icons.location_on, 'Santa Barbara, Iloilo'),
+              _buildInfoSection('Hobbies', Icons.sports_baseball,
+                  'Studying, Coding, Dancing, Writing'),
               _buildInfoSection('GitHub', Icons.code, 'www.github.com/Ash631'),
-
-              const SizedBox(height: 24,),
-
+              const SizedBox(height: 24),
               const Text(
                 'My Biography',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -68,6 +68,22 @@ class MyHomePage extends StatelessWidget {
                 textAlign: TextAlign.justify,
               ),
 
+
+              const SizedBox(height: 24),
+              const Text(
+                'Skills',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              _buildSkillsGridView(), 
+
+              const SizedBox(height: 24),
+              const Text(
+                'Experience',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              _buildExperienceTable(),
+
             ],
           ),
         ),
@@ -75,21 +91,83 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
+
   Widget _buildInfoSection(String title, IconData icon, String data) {
-    return Card( 
-      child: Padding( 
+    return Card(
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
             Icon(icon),
             const SizedBox(width: 8),
             Text('$title: '),
-            const Spacer(),
+            const Spacer(), 
             Text(data),
+
           ],
         ),
       ),
     );
   }
 
+  Widget _buildSkillsGridView() {
+    return GridView.count(
+      crossAxisCount: 3,
+      shrinkWrap: true, 
+      physics: const NeverScrollableScrollPhysics(), 
+      children: const [
+         Chip(label: Text('Flutter')),
+         Chip(label: Text('Dart')),
+         Chip(label: Text('Firebase')),
+         Chip(label: Text('Python')),
+         Chip(label: Text('Java')),
+         Chip(label: Text('C++')),
+      ],
+    );
+  }
+
+
+
+  Widget _buildExperienceTable() {
+    return Table(
+      border: TableBorder.all(),
+      columnWidths: const {
+        0: FlexColumnWidth(2),
+        1: FlexColumnWidth(3),
+        2: FlexColumnWidth(1),
+      },
+      children: const [
+        TableRow(children: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Position'),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Company'),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Years'),
+          ),
+        ]),
+        TableRow(children: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Data Transcriber'),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('PMSU Center LTI '),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('2020-2023'),
+          ),
+        ]),
+
+
+      ],
+    );
+  }
 }
